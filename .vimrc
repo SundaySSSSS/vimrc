@@ -32,6 +32,9 @@ Plug 'lfv89/vim-interestingwords'
 Plug 'Raimondi/delimitMate'
 " C++ 高亮插件
 Plug 'octol/vim-cpp-enhanced-highlight'
+" ctags自动生成插件
+Plug 'ludovicchabant/vim-gutentags'
+
 call plug#end()
 
 
