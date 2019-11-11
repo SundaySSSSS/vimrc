@@ -15,6 +15,8 @@ Plug 'tomasr/molokai'
 Plug 'scrooloose/nerdtree'
 " 文件搜索插件
 Plug 'ctrlpvim/ctrlp.vim'
+" 屏幕内光标移动插件
+Plug 'easymotion/vim-easymotion'
 " 多文件模糊搜索插件
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -71,15 +73,23 @@ noremap <C-l> <C-w>l
 
 " 设置文件树
 " 分别定义定位文件树, 启动文件树, 显示隐藏文件, 文件树忽略文件
+" 设置在文件数中定位当前文件
 nnoremap <leader>v :NERDTreeFind<cr>
+" 显示\隐藏文件树的快捷键
 nnoremap <leader>g :NERDTreeToggle<cr>
+" 设置显示隐藏文件
 let NERDTreeShowHidden=1
+" 忽略一些文件不在文件数中显示
 let NERDTreeIgnore = [
     \ '\.git$', '\.DS_Store$' 
     \]
 
 " 定义文件搜索插件(Ctrl-P)的快捷键为Ctrl-P
 let g:ctrlp_map = '<c-p>'
+
+" 屏幕内移动光标插件设置
+" 通过ss触发两字母搜索,之后符合输入的两字母的地方会重新标号,再次输入标号后可跳转
+nmap ss <Plug>(easymotion-s2)
 
 " Python插件设置
 let g:pymode_python = 'python3'
@@ -94,4 +104,25 @@ let g:pymode_options_max_line_length = 120
 
 " C++高亮插件设置
 let g:cpp_member_variable_highlight = 1
+
+" gutentags配置
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" 检测 ~/.cache/tags 不存在就新建
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
 
