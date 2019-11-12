@@ -17,6 +17,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 " 屏幕内光标移动插件
 Plug 'easymotion/vim-easymotion'
+" 成对编辑插件 ds(删除) cs(修改) ys(增加)
+Plug 'tpope/vim-surround'
 " 多文件模糊搜索插件
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
