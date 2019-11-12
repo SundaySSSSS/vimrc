@@ -20,17 +20,23 @@ Plug 'easymotion/vim-easymotion'
 " 成对编辑插件 ds(删除) cs(修改) ys(增加)
 Plug 'tpope/vim-surround'
 " 多文件模糊搜索插件
+" Files 文件路径 , 回车后输入文件名模糊搜索
+" Ag 内容, 模糊搜索文件内容
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " 多文件搜索替换
+" :Far foo bar **/*.py # 将foo替换bar, **/*.py指定了目录
+" Fardo #执行替换操作
 Plug 'brooth/far.vim'
 " go插件
 Plug 'fatih/vim-go'
 " python插件
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" 浏览代码插件
+" 代码大纲插件 ,依赖于Universal-Ctags, 需要另行安装
+" :TagbarToggle 命令, 打开代码大纲
 Plug 'majutsushi/tagbar'
-" 高亮单词插件
+" 高亮单词插件, <leader>k 高亮当前词, <leader>K 取消所有高亮, N,
+" n在高亮词中上下移动
 Plug 'lfv89/vim-interestingwords'
 " 括号匹配插件
 Plug 'Raimondi/delimitMate'
@@ -106,6 +112,9 @@ let g:pymode_options_max_line_length = 120
 
 " C++高亮插件设置
 let g:cpp_member_variable_highlight = 1
+
+" tagbar配置
+nnoremap <leader>t :TagbarToggle<CR>
 
 " gutentags配置
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
