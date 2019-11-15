@@ -15,18 +15,28 @@ Plug 'tomasr/molokai'
 Plug 'scrooloose/nerdtree'
 " 文件搜索插件
 Plug 'ctrlpvim/ctrlp.vim'
+" 屏幕内光标移动插件
+Plug 'easymotion/vim-easymotion'
+" 成对编辑插件 ds(删除) cs(修改) ys(增加)
+Plug 'tpope/vim-surround'
 " 多文件模糊搜索插件
+" Files 文件路径 , 回车后输入文件名模糊搜索
+" Ag 内容, 模糊搜索文件内容
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " 多文件搜索替换
+" :Far foo bar **/*.py # 将foo替换bar, **/*.py指定了目录
+" Fardo #执行替换操作
 Plug 'brooth/far.vim'
 " go插件
 Plug 'fatih/vim-go'
 " python插件
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" 浏览代码插件
+" 代码大纲插件 ,依赖于Universal-Ctags, 需要另行安装
+" :TagbarToggle 命令, 打开代码大纲
 Plug 'majutsushi/tagbar'
-" 高亮单词插件
+" 高亮单词插件, <leader>k 高亮当前词, <leader>K 取消所有高亮, N,
+" n在高亮词中上下移动
 Plug 'lfv89/vim-interestingwords'
 " 括号匹配插件
 Plug 'Raimondi/delimitMate'
@@ -71,15 +81,23 @@ noremap <C-l> <C-w>l
 
 " 设置文件树
 " 分别定义定位文件树, 启动文件树, 显示隐藏文件, 文件树忽略文件
+" 设置在文件数中定位当前文件
 nnoremap <leader>v :NERDTreeFind<cr>
+" 显示\隐藏文件树的快捷键
 nnoremap <leader>g :NERDTreeToggle<cr>
+" 设置显示隐藏文件
 let NERDTreeShowHidden=1
+" 忽略一些文件不在文件数中显示
 let NERDTreeIgnore = [
     \ '\.git$', '\.DS_Store$' 
     \]
 
 " 定义文件搜索插件(Ctrl-P)的快捷键为Ctrl-P
 let g:ctrlp_map = '<c-p>'
+
+" 屏幕内移动光标插件设置
+" 通过ss触发两字母搜索,之后符合输入的两字母的地方会重新标号,再次输入标号后可跳转
+nmap ss <Plug>(easymotion-s2)
 
 " Python插件设置
 let g:pymode_python = 'python3'
@@ -95,3 +113,5 @@ let g:pymode_options_max_line_length = 120
 " C++高亮插件设置
 let g:cpp_member_variable_highlight = 1
 
+" tagbar配置
+nnoremap <leader>t :TagbarToggle<CR>
